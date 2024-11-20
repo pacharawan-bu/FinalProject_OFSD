@@ -1,0 +1,151 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFSD Project</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            position: relative;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+            .navbar .title {
+                display: flex;
+                align-items: center; 
+                font-size: 20px;
+                font-weight: bold;
+                color: black;
+            }
+
+                .navbar .title img {
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 10px; 
+                    vertical-align: middle;
+                }
+
+            .navbar button {
+                background-color: black;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                margin-left: 10px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .navbar button:hover {
+                    background-color: #00aaff;
+                }
+
+        .blue-arc {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 150px;
+            background-color: #99E9FF;
+            z-index: 1; 
+        }
+
+            .blue-arc.left {
+                left: 0;
+                border-radius: 0px;
+            }
+
+            .blue-arc.right {
+                right: 0;
+                border-radius: 0px;
+            }
+
+        .content {
+            text-align: center;
+            padding: 50px;
+            position: relative;
+            z-index: 2; 
+        }
+
+            .content h1 {
+                font-size: 36px;
+                margin-bottom: 20px;
+            }
+
+            .content p {
+                font-size: 16px;
+                max-width: 600px;
+                margin: 0 auto;
+                line-height: 1.6;
+            }
+
+        .circles {
+            margin-top: 50px;
+        }
+
+            .circles .circle {
+                display: inline-block;
+                margin: 0 5px;
+                width: 30px;
+                height: 30px;
+                background-color: #99E9FF;
+                border-radius: 50%;
+            }
+
+                .circles .circle.big {
+                    width: 60px;
+                    height: 60px;
+                }
+    </style>
+</head>
+<body>
+    <div class="blue-arc left"></div>
+    <div class="blue-arc right"></div>
+
+
+    <div class="navbar">
+
+        <div class="title">
+            <img src="/image/cat.png">
+            <span>OFSD PROJECT</span>
+        </div>
+        <div>
+            <button onclick="location.href='LoginPage'">Login</button>
+            <button onclick="location.href='UserAccount'">Register</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to OFSD PROJECT</h1>
+        <p>
+            The Email Composition and Sending System is a web-based design to provide users with a seamless platform for composing, sending, and managing email communications.
+            This project is ideal for personal use, businesses, and organizations that require a straightforward interface for sending emails efficiently.
+        </p>
+        <div class="circles">
+            <span class="circle"></span>
+            <span class="circle"></span>
+            <span class="circle big"></span>
+            <span class="circle"></span>
+            <span class="circle big"></span>
+        </div>
+    </div>
+
+</body>

@@ -1,0 +1,113 @@
+﻿@page
+@model Final_new.Pages.ReadPassedEmailModel
+@{
+}
+
+<style>
+
+    .email-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 30px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #fff;
+        word-wrap: break-word;
+    }
+
+
+    .email-label {
+        margin: 12px 0;
+        padding: 10px;
+        font-size: 16px;
+        color: #333;
+        border-radius: 6px;
+        background-color: #f4f4f9;
+    }
+
+    .email-message-label {
+        margin: 12px 0;
+        padding: 10px;
+        font-size: 16px;
+        color: #333;
+        border-radius: 6px;
+        background-color: none;
+    }
+
+    .text-label {
+        color: #333;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        margin-top: 50px;
+    }
+
+    .email-message {
+        padding: 15px;
+        background-color: #eaf7ff;
+        border-radius: 6px;
+        color: #333;
+        font-size: 16px;
+        position: relative;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        white-space: pre-wrap;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+
+    .confirm-btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        margin-top: 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .confirm-btn:hover {
+            background-color: #555;
+        }
+
+    .message-label {
+        margin-bottom: 20px;
+    }
+
+
+    .email-message {
+        padding: 15px;
+        background-color: #eaf7ff;
+        border-radius: 6px;
+        color: #333;
+        font-size: 16px;
+    }
+</style>
+
+@if (Model.EmailDetails != null)
+{
+    <div class="text-label">Read Email</div>
+    <div class="email-container">
+        <div class="email-label"><strong>From:</strong> @Model.EmailDetails.EmailSender</div>
+        <div class="email-label"><strong>Date:</strong> @Model.EmailDetails.EmailDate</div>
+        <div class="email-label"><strong>Title:</strong> @Model.EmailDetails.EmailSubject</div>
+        <div class="email-message-label"><strong>Message</strong></div>
+        <div class="email-message">@Model.EmailDetails.EmailMessage</div>
+
+        <button class="confirm-btn" onclick="location.href='SentEmail'">Confirm Read</button>
+
+
+
+    </div>
+}
+else
+{
+    <p>No email data available.</p>
+}

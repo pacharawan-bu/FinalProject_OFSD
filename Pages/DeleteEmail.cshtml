@@ -1,0 +1,27 @@
+﻿@page
+@using Microsoft.Data.SqlClient
+
+@{
+    try
+    {
+        String emailId = Request.Query["EmailID"];
+        String connectionString = "Server=tcp:finalprojectofsd.database.windows.net,1433;Initial Catalog=FinalProjectOFSD;Persist Security Info=False;User ID=adminOFSD;Password=ofsd_1234;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = "DELETE FROM Emails WHERE EmailID = @EmailID";
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@EmailID", emailId);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+
+    }
+    Response.Redirect("/ViewEmail");
+}

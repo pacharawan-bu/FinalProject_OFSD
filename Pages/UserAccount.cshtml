@@ -1,0 +1,179 @@
+﻿@page
+@model Final_new.Pages.UserAccountModel
+@{
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Register</title>
+    <style>
+        body {
+            background-color: white; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px; 
+            background-color: white; 
+        }
+        .menu-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+            .menu-icon div {
+                width: 30px;
+                height: 4px;
+                background-color: black;
+                margin: 5px 0;
+            }
+
+        .sidebar {
+            position: absolute;
+            top: 60px; 
+            left: 20px; 
+            width: 200px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            display: none; 
+            z-index: 1000;
+        }
+
+            .sidebar.open {
+                display: block; 
+            }
+
+            .sidebar a {
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                color: black;
+                border-bottom: 1px solid #ccc;
+                text-align: left;
+            }
+
+                .sidebar a:hover {
+                    background-color: #f0f0f0;
+                }
+
+                .sidebar a:last-child {
+                    background-color: black;
+                    color: white;
+                }
+
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #333;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="menu-icon" onclick="toggleSidebar()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="/LoginPage">Login</a>
+        <a href="/UserAccount">Register</a>
+        <a href="/Index">Quit</a>
+    </div>
+    <div class="form-container">
+        <h2>Account Register</h2>
+        @if (!string.IsNullOrEmpty(Model.errorMessage))
+        {
+            <div style="color: red; margin-bottom: 15px;">@Model.errorMessage</div>
+        }
+        @if (!string.IsNullOrEmpty(Model.successMessage))
+        {
+            <div style="color: green; margin-bottom: 15px;">@Model.successMessage</div>
+        }
+        <form method="post">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="fname" placeholder="Enter First Name" value="@Model.userInfo.fname">
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lname" placeholder="Enter Last Name" value="@Model.userInfo.lname">
+
+            <label for="jposition">Job Position</label>
+            <select id="jposition" name="jposition">
+                <option value="Developer" selected="@(Model.userInfo.jposition == "Developer" ? "true" : "false")">Developer</option>
+                <option value="Tester" selected="@(Model.userInfo.jposition == "Tester" ? "true" : "false")">Tester</option>
+                <option value="HR" selected="@(Model.userInfo.jposition == "HR" ? "true" : "false")">HR</option>
+                <option value="Employee" selected="@(Model.userInfo.jposition == "Employee" ? "true" : "false")">Employee</option>
+            </select>
+       
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" name="numb" placeholder="Enter Phone Number" value="@Model.userInfo.numb">
+
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter Username" value="@Model.userInfo.username">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="pwd" placeholder="Enter Password">
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPwd" placeholder="Confirm Password">
+
+            <button type="submit">Create Account</button>
+        </form>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
+</body>

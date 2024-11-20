@@ -1,0 +1,206 @@
+﻿@page
+@model Final_new.Pages.ViewEmailModel
+@{
+    ViewData["Title"] = "Incoming Email";
+    ViewData["HideNavbar"] = true;
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+
+            background-color: white;
+        }
+
+        .menu-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+            .menu-icon div {
+                width: 30px;
+                height: 4px;
+                background-color: black;
+                margin: 5px 0;
+            }
+
+        .sidebar {
+            position: absolute;
+            top: 60px; 
+            left: 20px; 
+            width: 200px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            display: none; 
+            z-index: 1000;
+        }
+
+            .sidebar.open {
+                display: block; 
+            }
+
+            .sidebar a {
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                color: black;
+                border-bottom: 1px solid #ccc;
+                text-align: left;
+            }
+
+                .sidebar a:hover {
+                    background-color: #f0f0f0;
+                }
+
+                .sidebar a:last-child {
+                    background-color: black;
+                    color: white;
+                }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding-top: 20px;
+        }
+
+        .header {
+            color: black;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .compose-btn {
+            background-color: black;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .email-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+            .email-table th, .email-table td {
+                padding: 10px;
+                border: 1px solid #ddd;
+                text-align: center;
+            }
+
+            .email-table th {
+                color: black;
+                background-color: #99E9FF;
+                font-weight: bold;
+            }
+
+            .email-table td {
+                background-color: ghostwhite;
+            }
+
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .read-btn {
+            background-color: #4e8ef7;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .logout-btn {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="menu-icon" onclick="toggleSidebar()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="/UserProfile">Profile</a>
+        <a href="/ViewEmail">View Incoming Email</a>
+        <a href="/ComposeEmail">Compose Email</a>
+        <a href="/SentEmail">Sent Email</a>
+        <a href="/Index">Log out</a>
+    </div>
+
+    <div class="container">
+        <div class="header">Incoming Email</div>
+        <form method="post">
+            <table class="email-table">
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                        <th>Delete</th>
+                        <th>Read</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var email in Model.listEmails)
+                    {
+                        <tr>
+                            <td>@email.EmailSender</td>
+                            <td>@email.EmailSubject</td>
+                            <td>@email.EmailDate</td>
+                            <td>
+                                <a class="delete-btn" href="/DeleteEmail?EmailID=@email.EmailID" onclick="return confirmDelete();">Delete</a>
+                            </td>
+
+                            <td>
+                                <a class="read-btn" href="/ReadEmail?EmailID=@email.EmailID">Read Email</a>
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </form>
+    </div>
+    <script>
+        function toggleSidebar() 
+        {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this email?");
+        }
+    </script>
+</body>

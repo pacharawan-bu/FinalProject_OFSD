@@ -1,0 +1,150 @@
+﻿@page
+@model Final_new.Pages.UserProfileModel
+@{
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-container {
+            text-align: center;
+            width: 300px;
+            margin-top: 120px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .profile-details {
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .profile-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .profile-details .label {
+            font-weight: bold;
+        }
+
+        .profile-details .value {
+            color: #333;
+        }
+
+        .menu-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+            .menu-icon div {
+                width: 30px;
+                height: 4px;
+                background-color: black;
+                margin: 5px 0;
+            }
+
+        .sidebar {
+            position: absolute;
+            top: 60px; /* Place below the menu-icon */
+            left: 20px; /* Align with menu-icon */
+            width: 200px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            display: none; /* Hidden initially */
+            z-index: 1000;
+        }
+
+            .sidebar.open {
+                display: block; /* Show sidebar when open */
+            }
+
+            .sidebar a {
+                display: block;
+                padding: 10px;
+                text-decoration: none;
+                color: black;
+                border-bottom: 1px solid #ccc;
+                text-align: left;
+            }
+
+                .sidebar a:hover {
+                    background-color: #f0f0f0;
+                }
+
+                .sidebar a:last-child {
+                    background-color: black;
+                    color: white;
+                }
+    </style>
+</head>
+<body>
+    <!-- Menu Icon -->
+    <div class="menu-icon" onclick="toggleSidebar()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <a href="/UserProfile">Profile</a>
+        <a href="/ViewEmail">View Incoming Email</a>
+        <a href="/ComposeEmail">Compose Email</a>
+        <a href="/SentEmail">Sent Email</a>
+        <a href="/Index">Log out</a>
+    </div>
+
+    <div class="profile-container">
+        <h1>Profile</h1>
+        <div class="profile-details">
+            <div class="detail-row">
+                <span class="label">Name:</span>
+                <p> @Model.listUser.FirstOrDefault()?.fullname </p>
+            </div>
+            <div class="detail-row">
+                <span class="label">Job Position:</span>
+                <p> @Model.listUser.FirstOrDefault()?.position</p>
+            </div>
+            <div class="detail-row">
+                <span class="label">Phone Number:</span>
+                <p> @Model.listUser.FirstOrDefault()?.number</p>
+            </div>
+            <div class="detail-row">
+                <span class="label">Username:</span>
+                <p> @Model.listUser.FirstOrDefault()?.Username</p>
+            </div>
+            
+        </div>
+        
+    </div>
+    <script>
+        function toggleSidebar()
+        {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
+</body>
